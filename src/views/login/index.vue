@@ -2,17 +2,24 @@
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
+      <!-- 主体标题 -->
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <!-- <h3 class="title">Login Form</h3> -->
+        <h3>
+
+          <img src="@/assets/common/login-logo.png" alt="">
+        </h3>
       </div>
 
-      <el-form-item prop="username">
+      <!-- 主体内容 -->
+      <!-- prop='绑定的数据名&&校验的数据名'  -->
+      <el-form-item prop="mobile">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="username"
-          v-model="loginForm.username"
+          v-model="loginForm.mobile"
           placeholder="Username"
           name="username"
           type="text"
@@ -40,12 +47,19 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <!-- 登录按钮 -->
+      <el-button
+        :loading="loading"
+        class="loginBtn"
+        type="primary"
+        style="width:100%;margin-bottom:30px;"
+        @click.native.prevent="handleLogin"
+      >登录</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+        <!-- <span style="margin-right:20px;">username: admin</span>
+        <span> password: any</span> -->
+        <span>还没有账号？立即注册</span>
       </div>
 
     </el-form>
@@ -53,33 +67,43 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+// import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
+    // const validateUsername = (rule, value, callback) => {
+    //   if (!validUsername(value)) {
+    //     callback(new Error('Please enter the correct user name'))
+    //   } else {
+    //     callback()
+    //   }
+    // }
+    // const validatePassword = (rule, value, callback) => {
+    //   if (value.length < 6) {
+    //     callback(new Error('The password can not be less than 6 digits'))
+    //   } else {
+    //     callback()
+    //   }
+    // }
+    const checkMobile = (rule, value, callback) => {
+      const mobileReg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+      if (mobileReg.test(value)) {
         callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
       } else {
-        callback()
+        callback('请输入正确的手机号码')
       }
     }
     return {
+      // 表单数据
       loginForm: {
-        username: 'admin',
+        mobile: 'admin',
         password: '111111'
       },
+      // 校验表单的规则
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        mobile: [{ required: true, trigger: 'blur', message: '请输入手机号' }, { validator: checkMobile }],
+        password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
       },
       loading: false,
       passwordType: 'password',
@@ -130,7 +154,8 @@ export default {
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
 $bg:#283443;
-$light_gray:#fff;
+// $light_gray:#fff;
+$light_gray:#68b0fe;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -141,6 +166,12 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  .loginBtn {
+  background: #407ffe;
+  height: 64px;
+  line-height: 32px;
+  font-size: 24px;
+}
   .el-input {
     display: inline-block;
     height: 47px;
@@ -165,9 +196,9 @@ $cursor: #fff;
 
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
+    background: rgba(255, 255, 255, 0.7); // 输入登录表单的背景色
   }
 }
 </style>
@@ -180,7 +211,9 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  // background-color: $bg;
+  background: url(~@/assets/common/login.jpg) no-repeat;
+  background-size: cover;
   overflow: hidden;
 
   .login-form {
@@ -196,6 +229,7 @@ $light_gray:#eee;
     font-size: 14px;
     color: #fff;
     margin-bottom: 10px;
+    text-align: center;
 
     span {
       &:first-of-type {
