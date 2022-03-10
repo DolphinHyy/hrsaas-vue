@@ -14,6 +14,7 @@ router.beforeEach((to, from, next) => {
   // console.log('--------@/permission.js--------11')
   const whiteList = ['/login', '/404']
   if (token) {
+    if (to.path === '/login') return next('/')
     next()
   } else {
     if (whiteList.includes(to.path)) {
