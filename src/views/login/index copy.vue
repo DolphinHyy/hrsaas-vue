@@ -94,14 +94,6 @@ export default {
         callback('请输入正确的手机号码')
       }
     }
-    const checkPassword = (rule, value, callback) => {
-      const passwordReg = /^\w{6,16}$/
-      if (passwordReg.test(value)) {
-        callback()
-      } else {
-        callback('请输入6-16位密码')
-      }
-    }
     return {
       // 表单数据
       loginForm: {
@@ -111,7 +103,7 @@ export default {
       // 校验表单的规则
       loginRules: {
         mobile: [{ required: true, trigger: 'blur', message: '请输入手机号' }, { validator: checkMobile }],
-        password: [{ required: true, trigger: 'blur', message: '请输入密码' }, { validator: checkPassword }]
+        password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
       },
       loading: false,
       passwordType: 'password',
@@ -138,12 +130,19 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(async flag => {
-        if (!flag) return
-        await this.$store.dispatch('user/login', this.loginForm)
-        this.$router.push('/')
-        // console.log(this.loginForm)
-        // console.log('点击登录')
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
       })
     }
   }

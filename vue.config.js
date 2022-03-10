@@ -30,7 +30,16 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    // before: require('./mock/mock-server.js')
+    // 代理
+    proxy: {
+      // 并不是拦截所有接口
+      // 如果是‘/api’开头的，就是需要代理的请求了,'http://localhost.net:8083/api'将被拦截
+      // 向目标（target）服务器发送请求
+      '/api': {
+        target: 'http://ihrm-java.itheima.net'
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
