@@ -34,6 +34,18 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+Vue.directive('imgerror', {
+  inserted(el, binding) {
+    // el.onerror = (imgUrl) => {
+    //   el.src = imgUrl
+    // }
+    el.onerror = function() {
+      // el.src = 'http://destiny001.gitee.io/image/zxc.gif'
+      el.src = binding.value
+    }
+    console.log('img自定义指令')
+  }
+})
 
 new Vue({
   el: '#app',

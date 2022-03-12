@@ -11,7 +11,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         <!-- 默认展示的头像图片 -->
         <div class="avatar-wrapper">
-          <img :src="userInfo.staffPhoto" class="user-avatar">
+          <img v-imgerror="defaultImg" :src="userInfo.staffPhoto" class="user-avatar">
           <span>{{ userInfo.username }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
@@ -37,10 +37,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
+import defaultImg from '@/assets/common/bigUserHeader.png'
 
 export default {
   components: {
     Hamburger
+  },
+  data() {
+    return {
+      defaultImg
+    }
   },
   computed: {
     ...mapGetters([

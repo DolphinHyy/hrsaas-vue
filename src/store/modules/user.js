@@ -15,7 +15,7 @@ const mutations = {
   setUserInfo(state, payload) {
     state.userInfo = payload
   },
-  logout(state) {
+  clearToken(state) {
     state.token = null
     removeToken()
   }
@@ -37,7 +37,7 @@ const actions = {
     context.commit('setUserInfo', { ...res, ...userDetail })
   },
   logout(context, payload) {
-    context.commit('logout')
+    context.commit('clearToken')
   }
 }
 export default {
