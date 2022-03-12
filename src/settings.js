@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'hrsaas',
+  title: '人力资源-SAAS-VUE',
 
   /**
    * @type {boolean} true | false

@@ -15,6 +15,7 @@ router.beforeEach((to, from, next) => {
   const whiteList = ['/login', '/404']
   if (token) {
     if (to.path === '/login') return next('/')
+    store.dispatch('user/getUserInfo')
     next()
   } else {
     if (whiteList.includes(to.path)) {
