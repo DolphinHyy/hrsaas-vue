@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import { getToken } from '@/utils/auth'
 
 export const loginAPI = (data) => {
   return request({
@@ -13,10 +12,7 @@ export const loginAPI = (data) => {
 export const getUserInfoAPI = () => {
   return request({
     url: '/sys/profile',
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + getToken()
-    }
+    method: 'POST'
   })
 }
 
@@ -24,9 +20,6 @@ export const getUserInfoAPI = () => {
 export const getUserDetailAPI = (id) => {
   return request({
     url: '/sys/user/' + id,
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer ' + getToken()
-    }
+    method: 'GET'
   })
 }

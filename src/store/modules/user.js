@@ -1,5 +1,5 @@
 import { loginAPI, getUserInfoAPI, getUserDetailAPI } from '@/api/user.js'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, setTokenTime } from '@/utils/auth'
 
 const state = {
   // token: JSON.parse(localStorage.getItem('HRSAAS_TOKEN')) || null
@@ -26,7 +26,9 @@ const actions = {
     const res = await loginAPI(payload)
     // console.log('login-action:', res)
     context.commit('setToken', res)
-    // 将token存入cookies 此setToken非mutations中的setToken，而是引自utils/auth.js的setToken
+    // 将把token存入Cookies的时间戳也存入Cookies用于判断token是否过期
+    setTokenTime()
+    // 将token存入cookies 此setToken非musstations中的setToken，而是引自utils/auth.js的setToken
     setToken(res)
   },
   async getUserInfo(context, payload) {
