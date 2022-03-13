@@ -1,10 +1,6 @@
 <template>
-  <div class="dashboard-container">
-    <div class="app-container">
-      <h2>
-        审批
-      </h2>
-    </div>
+  <div>
+    组织架构
   </div>
 </template>
 

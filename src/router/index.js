@@ -5,6 +5,14 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import approvalsRouter from './modules/approvals'
+import departmentsRouter from './modules/departments'
+import employeesRouter from './modules/employees'
+import permissionRouter from './modules/permission'
+import attendancesRouter from './modules/attendances'
+import salarysRouter from './modules/salarys'
+import settingRouter from './modules/setting'
+import socialRouter from './modules/social'
 
 /**
  * constantRoutes:静态路由
@@ -29,8 +37,8 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      component: () => import('@/views/dashboard/index')
+      // meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
 
@@ -38,15 +46,16 @@ export const constantRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const variableRoutes = [{
-  path: '/approvals',
-  component: Layout,
-  children: [{
-    path: '',
-    component: () => import('@/views/approvals'),
-    meta: { title: '审批', icon: 'tree-table' }
-  }]
-}]
+const variableRoutes = [
+  approvalsRouter,
+  departmentsRouter,
+  employeesRouter,
+  permissionRouter,
+  attendancesRouter,
+  salarysRouter,
+  settingRouter,
+  socialRouter
+]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
