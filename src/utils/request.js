@@ -40,7 +40,7 @@ request.interceptors.response.use(function(response) {
   // return response
 }, function(error) {
   // 对响应错误做点什么
-  if (error.response && error.response.status === 401) {
+  if (error.response.status === 401) {
     store.dispatch('user/logout')
     router.push('/login')
     Message.error('登录过期')
