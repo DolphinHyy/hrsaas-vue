@@ -43,7 +43,7 @@ Vue.directive('imgerror', {
       // el.src = 'http://destiny001.gitee.io/image/zxc.gif'
       el.src = binding.value
     }
-    console.log('img自定义指令')
+    // console.log('img自定义指令')
   }
 })
 
