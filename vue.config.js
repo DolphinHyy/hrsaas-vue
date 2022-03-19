@@ -37,7 +37,8 @@ module.exports = {
       // 如果是‘/api’开头的，就是需要代理的请求了,'http://localhost.net:8083/api'将被拦截
       // 向目标（target）服务器发送请求
       '/api': {
-        target: 'http://ihrm-java.itheima.net'
+        // target: 'http://ihrm-java.itheima.net'
+        target: 'http://ihrm.itheima.net'
       }
     }
   },
