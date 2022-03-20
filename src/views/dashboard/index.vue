@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-container">
+    <PageTools />
     <div class="dashboard-text">name: {{ name }}</div>
   </div>
 </template>

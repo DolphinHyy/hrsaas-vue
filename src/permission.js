@@ -8,7 +8,7 @@ import store from '@/store'
 // to:目标path
 // from:从哪个地址来
 // next:跳转，不调用则不跳转
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   const token = store.getters.token
   const whiteList = ['/login', '/404']
   if (token) {
@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
     // }
     if (to.path === '/login') return next('/')
     if (!store.getters.userInfo.id) {
-      store.dispatch('user/getUserInfo')
+      await store.dispatch('user/getUserInfo')
     }
     next()
   } else {
