@@ -2,8 +2,8 @@
   <div>
     <el-card>
       <el-row type="flex">
-        <el-col v-if="isShowI" class="left">
-          <div>
+        <el-col v-if="isShowI">
+          <div class="left">
             <i class="el-icon-info" style="color:blue" />
             <slot name="before">
               <span>共16条记录</span>

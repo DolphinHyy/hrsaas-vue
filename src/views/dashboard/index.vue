@@ -2,6 +2,7 @@
   <div class="dashboard-container">
     <PageTools />
     <div class="dashboard-text">name: {{ name }}</div>
+    <UploadImg @onSuccess="onSuccess" />
   </div>
 </template>
 
@@ -14,6 +15,11 @@ export default {
     ...mapGetters([
       'name'
     ])
+  },
+  methods: {
+    onSuccess(data) {
+      console.log(data.url)
+    }
   }
 }
 </script>

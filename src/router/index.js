@@ -13,6 +13,7 @@ import attendancesRouter from './modules/attendances'
 import salarysRouter from './modules/salarys'
 import settingRouter from './modules/setting'
 import socialRouter from './modules/social'
+import importRouter from './modules/import-router'
 
 /**
  * constantRoutes:静态路由
@@ -54,7 +55,8 @@ const variableRoutes = [
   attendancesRouter,
   salarysRouter,
   settingRouter,
-  socialRouter
+  socialRouter,
+  importRouter
 ]
 
 const createRouter = () => new Router({
